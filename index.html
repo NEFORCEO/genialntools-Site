@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" type="image/x-icon" href="https://i.postimg.cc/tCzPF3p5/IMG-20250930-083152-668.jpg">
+    <title>GenialnTools - Ускорение и замедление кода</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo floating">
+                <img src="https://i.postimg.cc/tCzPF3p5/IMG-20250930-083152-668.jpg" alt="GenialnTools Logo">
+            </div>
+            <h1>GenialnTools</h1>
+            <p class="subtitle">Библиотека для ускорения и замедления выполнения кода</p>
+        </header>
+        
+        <section class="features">
+            <div class="feature">
+                <h3>Замедление кода</h3>
+                <p>Используйте декоратор @slowed для контролируемого замедления выполнения функций. Идеально для отладки и анализа.</p>
+            </div>
+            <div class="feature">
+                <h3>Ускорение кода</h3>
+                <p>Применяйте декоратор @speed для увеличения скорости выполнения функций. Максимизируйте производительность.</p>
+            </div>
+            <div class="feature">
+                <h3>Простота использования</h3>
+                <p>Интуитивно понятный API позволяет легко интегрировать функциональность в существующие проекты.</p>
+            </div>
+        </section>
+        
+        <section class="code-examples">
+            <h2>Примеры использования</h2>
+            <div class="examples">
+                <div class="example">
+                    <h3>Замедление выполнения</h3>
+                    <pre><code>from genialntools import Slowed
+
+slowed = Slowed()
+
+@slowed(2)
+def test():
+    print("Hello")
+
+test()</code></pre>
+                </div>
+                <div class="example">
+                    <h3>Ускорение выполнения</h3>
+                    <pre><code>from genialntools import Speed
+
+speed = Speed()
+
+@speed(2)
+def calc(x):
+    return x * 2
+
+print(calc(5))</code></pre>
+                </div>
+            </div>
+        </section>
+        
+        <section class="install">
+            <h2>Установка</h2>
+            <p>Установите библиотеку с помощью pip:</p>
+            <div class="install-code">pip install genialntools</div>
+            <p>Начните использовать возможности ускорения и замедления кода уже сегодня!</p>
+        </section>
+        
+        <footer>
+            <p>© 2023 GenialnTools. Все права защищены.</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS("particles-js", {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: "#00a2ff" },
+                    shape: { type: "circle" },
+                    opacity: { value: 0.5, random: true },
+                    size: { value: 3, random: true },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: "#00a2ff",
+                        opacity: 0.4,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 2,
+                        direction: "none",
+                        random: true,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: { enable: true, mode: "repulse" },
+                        onclick: { enable: true, mode: "push" },
+                        resize: true
+                    }
+                },
+                retina_detect: true
+            });
+            
+            document.addEventListener('wheel', function(e) {
+                if (e.ctrlKey) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && (e.key === '+' || e.key === '-' || e.key === '0')) {
+                    e.preventDefault();
+                }
+            });
+            
+            document.addEventListener('touchstart', function(e) {
+                if (e.touches.length > 1) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            let touchStartDistance = 0;
+            document.addEventListener('touchmove', function(e) {
+                if (e.touches.length === 2) {
+                    e.preventDefault();
+                    const touch1 = e.touches[0];
+                    const touch2 = e.touches[1];
+                    const currentDistance = Math.hypot(
+                        touch1.clientX - touch2.clientX,
+                        touch1.clientY - touch2.clientY
+                    );
+                    
+                    if (touchStartDistance === 0) {
+                        touchStartDistance = currentDistance;
+                    }
+                    
+                    const scale = currentDistance / touchStartDistance;
+                    if (scale !== 1) {
+                        e.preventDefault();
+                    }
+                }
+            }, { passive: false });
+            
+            document.addEventListener('touchend', function() {
+                touchStartDistance = 0;
+            });
+        });
+    </script>
+</body>
+</html>
